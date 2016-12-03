@@ -14,7 +14,6 @@ public class Internship {
     private Date dateApplied;
     private String length;
     private String location;
-
     private List<Stage> applicationStages;
 
     public Internship(String companyName, String role, String dateApplied) {
@@ -28,6 +27,18 @@ public class Internship {
         } catch(ParseException e) {
             System.out.println("The date supplied is incorrect, date is set to null");
         }
+    }
+
+    public Stage getCurrentStage() {
+        for(Stage stage : applicationStages) {
+            if(stage.isWaitingForResponse()) return stage;
+        }
+
+        return null;
+    }
+
+    public Company getCompany() {
+        return company;
     }
 
     public void addStage(Stage stage) {

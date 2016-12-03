@@ -12,6 +12,18 @@ public class Stage {
         this.stageName = stageName;
     }
 
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public boolean isWaitingForResponse() {
+        return isWaitingForResponse;
+    }
+
+    public boolean isSuccessful() {
+        return isSuccessful;
+    }
+
     public void setCompleted(boolean completed) {
         isCompleted = completed;
     }
@@ -44,4 +56,5 @@ public class Stage {
 
         return s;
     }
+
 }

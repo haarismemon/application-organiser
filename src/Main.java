@@ -4,27 +4,29 @@
 public class Main {
 
     public static void main(String[] args) {
-        Internship accenture = new Internship("Accenture", "Technology Industrial Placement", "16/11/16");
-        accenture.setLength("12 Months");
-        accenture.setLocation("London");
+        Internship accentureTech = new Internship("Accenture", "Technology Industrial Placement", "16/11/16");
+        accentureTech.setLength("12 Months");
+        accentureTech.setLocation("London");
 
         Stage firstStage = new Stage("Online Application");
         firstStage.setCompleted(true);
         firstStage.setSuccessful(true);
-        accenture.addStage(firstStage);
+        accentureTech.addStage(firstStage);
 
         Stage secondStage = new Stage("Online Test");
         secondStage.setCompleted(true);
         secondStage.setSuccessful(true);
-        accenture.addStage(secondStage);
+        accentureTech.addStage(secondStage);
 
         Stage thirdStage = new Stage("Online Interview");
         thirdStage.setCompleted(true);
         thirdStage.setWaitingForResponse(true);
-        accenture.addStage(thirdStage);
+        accentureTech.addStage(thirdStage);
 
 //        System.out.println(accenture.getDateApplied());
-        System.out.println(accenture.getApplicationStages());
+//        System.out.println(accentureTech.getApplicationStages());
+
+        System.out.println("Current Stage for " + accentureTech.getCompany() + " is " + accentureTech.getCurrentStage());
     }
 
 }
