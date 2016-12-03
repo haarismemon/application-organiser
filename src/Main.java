@@ -1,5 +1,8 @@
+import model.Internship;
+import model.Stage;
+
 /**
- * This class tests the classes for an Internship.
+ * This class tests the classes for an model.Internship.
  */
 public class Main {
 
@@ -9,7 +12,7 @@ public class Main {
         accentureTech.setLocation("London");
         accentureTech.setApplied("16/11/16", true);
 
-//        Stage firstStage = new Stage("Online Application");
+//        model.Stage firstStage = new model.Stage("Online Application");
 //        firstStage.setCompleted(true);
 //        firstStage.setSuccessful(true);
 //        accentureTech.addStage(firstStage);
@@ -27,7 +30,7 @@ public class Main {
 //        System.out.println(accenture.getDateApplied());
         System.out.println(accentureTech.getApplicationStages());
 
-        System.out.println("Current Stage for " + accentureTech.getCompany() + " is " + accentureTech.getCurrentStage());
+        System.out.println("Current model.Stage for " + accentureTech.getCompany() + " is " + accentureTech.getCurrentStage());
     }
 
 }
