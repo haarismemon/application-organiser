@@ -16,17 +16,10 @@ public class Internship {
     private String location;
     private List<Stage> applicationStages;
 
-    public Internship(String companyName, String role, String dateApplied) {
+    public Internship(String companyName, String role) {
         company = new Company(companyName);
         this.role = role;
-        applicationStages = new ArrayList<Stage>();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        try{
-            this.dateApplied = dateFormat.parse(dateApplied);
-        } catch(ParseException e) {
-            System.out.println("The date supplied is incorrect, date is set to null");
-        }
+        applicationStages = new ArrayList<>();
     }
 
     public Stage getCurrentStage() {
@@ -35,6 +28,29 @@ public class Internship {
         }
 
         return null;
+    }
+
+    public Stage setApplied(String dateApplied) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try{
+            this.dateApplied = dateFormat.parse(dateApplied);
+        } catch(ParseException e) {
+            System.out.println("The date supplied is incorrect, date is set to null");
+        }
+
+        Stage onlineApplication = new Stage("Online Application");
+        //if the user has applied, then online application is completed
+        onlineApplication.setCompleted(true, dateApplied);
+        //if the user has applied, and not specified the isSuccessful then they are waiting for a response.
+        onlineApplication.setWaitingForResponse(true);
+        addStage(onlineApplication);
+
+        return onlineApplication;
+    }
+
+    public void setApplied(String dateApplied, boolean isSuccessful) {
+        Stage onlineApplication = setApplied(dateApplied);
+        onlineApplication.setSuccessful(isSuccessful);
     }
 
     public Company getCompany() {
