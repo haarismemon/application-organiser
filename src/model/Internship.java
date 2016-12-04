@@ -1,5 +1,6 @@
 package model;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,10 +14,10 @@ public class Internship {
 
     private Company company;
     private String role;
-    private Date dateApplied;
+//    private Date dateApplied;
     private String length;
     private String location;
-    private List<Stage> applicationStages;
+    private List<ApplicationStage> applicationStages;
 
     public Internship(String companyName, String role) {
         company = new Company(companyName);
@@ -24,48 +25,65 @@ public class Internship {
         applicationStages = new ArrayList<>();
     }
 
-    public Stage getCurrentStage() {
-        for(Stage stage : applicationStages) {
+    public String print() {
+        String s =  company.getName() + ": " + role + " - Current Stage: ";
+
+        ApplicationStage currentStage = getCurrentStage();
+        if(currentStage != null) s += currentStage;
+        else s+= "Not yet Applied";
+
+//        s+= " - Applied On: ";
+//        if(dateApplied != null) {
+//            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+//            s += df.format(dateApplied);
+//        }
+//        else s+= "Not yet";
+
+        return s;
+    }
+
+    public ApplicationStage getCurrentStage() {
+        for(ApplicationStage stage : applicationStages) {
             if(stage.isWaitingForResponse()) return stage;
         }
 
         return null;
     }
 
-    public Stage setApplied(String dateApplied) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        try{
-            this.dateApplied = dateFormat.parse(dateApplied);
-        } catch(ParseException e) {
-            System.out.println("The date supplied is incorrect, date is set to null");
-        }
-
-        Stage onlineApplication = new Stage("Online Application");
-        //if the user has applied, then online application is completed
-        onlineApplication.setCompleted(true, dateApplied);
-        //if the user has applied, and not specified the isSuccessful then they are waiting for a response.
-        onlineApplication.setWaitingForResponse(true);
-        addStage(onlineApplication);
-
-        return onlineApplication;
-    }
-
-    public void setApplied(String dateApplied, boolean isSuccessful) {
-        Stage onlineApplication = setApplied(dateApplied);
-        onlineApplication.setSuccessful(isSuccessful);
-    }
+//    public ApplicationStage setApplied(String dateApplied) {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        try{
+//            this.dateApplied = dateFormat.parse(dateApplied);
+//        } catch(ParseException e) {
+//            System.out.println("The date supplied is incorrect, date is set to null");
+//        }
+//
+//        ApplicationStage onlineApplication = new ApplicationStage("Online Application");
+//        //if the user has applied, then online application is completed
+//        onlineApplication.setCompleted(true, dateApplied);
+//        //if the user has applied, and not specified the isSuccessful then they are waiting for a response.
+//        onlineApplication.setWaitingForResponse(true);
+//        addStage(onlineApplication);
+//
+//        return onlineApplication;
+//    }
+//
+//    public void setApplied(String dateApplied, boolean isSuccessful) {
+//        ApplicationStage onlineApplication = setApplied(dateApplied);
+//        onlineApplication.setSuccessful(isSuccessful);
+//    }
 
     public Company getCompany() {
         return company;
     }
 
-    public void addStage(Stage stage) {
+    public void addStage(ApplicationStage stage) {
         applicationStages.add(stage);
     }
 
-    public Date getDateApplied() {
-        return dateApplied;
-    }
+//    public Date getDateApplied() {
+//        return dateApplied;
+//    }
 
     public void setLength(String length) {
         this.length = length;
@@ -75,7 +93,7 @@ public class Internship {
         this.location = location;
     }
 
-    public List<Stage> getApplicationStages() {
+    public List<ApplicationStage> getApplicationStages() {
         return applicationStages;
     }
 

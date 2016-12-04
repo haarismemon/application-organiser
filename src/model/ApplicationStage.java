@@ -5,9 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * This class represents a particular model.Stage in the application process of an model.Internship.
+ * This class represents a particular model.ApplicationStage in the application process of an model.Internship.
  */
-public class Stage {
+public class ApplicationStage {
 
     private String stageName;
     private boolean isCompleted;
@@ -17,7 +17,7 @@ public class Stage {
     private Date dateOfCompletion;
     private Date dateOfReply;
 
-    public Stage(String stageName) {
+    public ApplicationStage(String stageName) {
         this.stageName = stageName;
     }
 

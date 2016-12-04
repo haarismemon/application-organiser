@@ -29,4 +29,8 @@ public class Applications {
         }
     }
 
+    public List<Internship> getApplications() {
+        return applications;
+    }
+
 }
