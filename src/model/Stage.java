@@ -13,6 +13,7 @@ public class Stage {
     private boolean isCompleted;
     private boolean isWaitingForResponse;
     private Boolean isSuccessful;
+    private Date dateOfStart;
     private Date dateOfCompletion;
     private Date dateOfReply;
 
@@ -31,6 +32,10 @@ public class Stage {
         }
 
         return date;
+    }
+
+    public void setStartDate(Date dateOfStart) {
+        this.dateOfStart = dateOfStart;
     }
 
     public boolean isCompleted() {
