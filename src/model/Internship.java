@@ -43,10 +43,7 @@ public class Internship {
     }
 
     public ApplicationStage getCurrentStage() {
-        for(ApplicationStage stage : applicationStages) {
-            if(stage.isWaitingForResponse()) return stage;
-        }
-
+        if(applicationStages.size() > 0) return applicationStages.get(applicationStages.size() - 1);
         return null;
     }
 
