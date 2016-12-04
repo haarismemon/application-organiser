@@ -34,8 +34,8 @@ public class ApplicationStage {
         return date;
     }
 
-    public void setStartDate(Date dateOfStart) {
-        this.dateOfStart = dateOfStart;
+    public void setStartDate(String dateOfStart) {
+        this.dateOfStart = stringToDate(dateOfStart);
     }
 
     public boolean isCompleted() {
@@ -63,13 +63,13 @@ public class ApplicationStage {
         return isSuccessful;
     }
 
-    public void setSuccessful(boolean successful) {
+    public void setSuccessful(Boolean successful) {
         isSuccessful = successful;
         //if the user specifies if stage is successful or not, then they are no longer waiting for a response
         isWaitingForResponse = false;
     }
 
-    public void setSuccessful(boolean successful, String date) {
+    public void setSuccessful(Boolean successful, String date) {
         setSuccessful(successful);
         this.dateOfReply = stringToDate(date);
     }
