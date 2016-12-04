@@ -1,5 +1,6 @@
 import model.Internship;
 import model.Stage;
+import model.Applications;
 
 /**
  * This class tests the classes for an model.Internship.
@@ -7,6 +8,8 @@ import model.Stage;
 public class Main {
 
     public static void main(String[] args) {
+        Applications applications = new Applications();
+
         Internship accentureTech = new Internship("Accenture", "Technology Industrial Placement");
         accentureTech.setLength("12 Months");
         accentureTech.setLocation("London");
@@ -27,10 +30,12 @@ public class Main {
         thirdStage.setWaitingForResponse(true);
         accentureTech.addStage(thirdStage);
 
+        applications.addInternship(accentureTech);
+
 //        System.out.println(accenture.getDateApplied());
         System.out.println(accentureTech.getApplicationStages());
 
-        System.out.println("Current model.Stage for " + accentureTech.getCompany() + " is " + accentureTech.getCurrentStage());
+        System.out.println("Current Stage for " + accentureTech.getCompany() + " is " + accentureTech.getCurrentStage());
     }
 
 }
