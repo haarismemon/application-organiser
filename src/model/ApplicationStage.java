@@ -80,13 +80,15 @@ public class ApplicationStage {
 
         if(isCompleted) {
             if(isWaitingForResponse) {
-                s += " - Waiting for Response";
+                s += " - Waiting";
             } else {
-                if(isSuccessful) {
-                    s+= " - Successful!";
-                } else {
-                    s+= " - Failed";
-                }
+                if(isSuccessful() != null) {
+                    if(isSuccessful) {
+                        s+= " - Successful!";
+                    } else {
+                        s+= " - Failed";
+                    }
+                } else s += " - Don't Know";
             }
         } else {
             s += " - Not Completed";

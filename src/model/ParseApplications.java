@@ -47,21 +47,27 @@ public class ParseApplications {
                         String date_of_reply = internshipStage[6];
 
                         ApplicationStage stage = new ApplicationStage(stage_name);
+
                         if(is_completed.equals("yes")) {
                             if(!date_of_completed.equals("null")) stage.setCompleted(true, date_of_completed);
                             else stage.setCompleted(true);
                         }
                         else if(is_completed.equals("no")) stage.setCompleted(false);
 
-                        if(is_waiting_for_response.equals("yes")) stage.setWaitingForResponse(true);
+                        if(is_waiting_for_response.equals("yes")) {
+//                            System.out.println("is waiting");
+                            stage.setWaitingForResponse(true);
+                        }
                         else if(is_waiting_for_response.equals("no")) stage.setWaitingForResponse(false);
+
+//                        System.out.println(stage.isWaitingForResponse());
 
                         if(is_successful.equals("yes")) {
                             if(!date_of_reply.equals("null")) stage.setSuccessful(true, date_of_reply);
                             else stage.setSuccessful(true);
                         }
                         else if(is_successful.equals("no")) stage.setSuccessful(false);
-                        else if(is_successful.equals("null")) stage.setSuccessful(null);
+//                        else if(is_successful.equals("null")) stage.setSuccessful(null);
 
                         if(!date_of_start.equals("null")) stage.setStartDate(date_of_start);
 
@@ -85,7 +91,9 @@ public class ParseApplications {
     }
 
     public static void main(String[] args) {
-        ParseApplications.parse();
+        for(Internship i : ParseApplications.parse().getApplications()) {
+            System.out.println(i.getCurrentStage());
+        }
     }
 
 }
