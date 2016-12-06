@@ -1,11 +1,17 @@
 package view;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.ApplicationStage;
 import model.Applications;
 import model.Internship;
 import model.ParseApplications;
@@ -19,17 +25,50 @@ public class ApplicationsView extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Internship Application Organiser");
 
-        VBox vBox = new VBox();
+        BorderPane root = new BorderPane();
 
-        Applications applications = ParseApplications.parse();
+        VBox vBox = new VBox();
+        vBox.setSpacing(7);
+        vBox.setPadding(new Insets(10, 50, 10, 50));
+
+        ParseApplications parseApplications = new ParseApplications();
+        Applications applications = parseApplications.getApplications();
 
 
         for(Internship internship : applications.getApplications()) {
-            vBox.getChildren().add(new Label(internship.print()));
+
+            BorderPane bp = new BorderPane();
+            HBox hBox = new HBox();
+            Label companyLabel = new Label(internship.getCompanyName());
+            companyLabel.setMinWidth(150);
+            hBox.getChildren().add(companyLabel);
+            Label roleLabel = new Label(internship.getRole());
+            hBox.getChildren().add(roleLabel);
+            bp.setCenter(hBox);
+            bp.setRight(new Label(internship.printCurrentStage()));
+
+            bp.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+//                    applications.getInternship(internship.getCompanyName(), internship.getRole());
+                    System.out.println(internship);
+                }
+            });
+
+            vBox.getChildren().add(bp);
+            vBox.getChildren().add(new Separator());
+
         }
 
+        root.setCenter(vBox);
+
+        ScrollPane scrollPane = new ScrollPane(root);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
+
+
         // A new WelcomeView scene which is the Main Menu
-        Scene scene = new Scene(vBox, 700, 300);
+        Scene scene = new Scene(scrollPane, 710, 300);
         primaryStage.setMinWidth(550);
         primaryStage.setMinHeight(450);
         primaryStage.setScene(scene);
