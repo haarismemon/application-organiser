@@ -3,6 +3,7 @@ package view;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -19,11 +20,13 @@ import model.ParseApplications;
 /**
  * This class represents the Applications window that allows user to view all the Internships applied to
  */
-public class ApplicationsView extends Application {
+public class ApplicationsView extends ScrollPane {
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Internship Application Organiser");
+    public ApplicationsView() {
+        setUp();
+    }
+
+    private void setUp() {
 
         BorderPane root = new BorderPane();
 
@@ -50,8 +53,15 @@ public class ApplicationsView extends Application {
             bp.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-//                    applications.getInternship(internship.getCompanyName(), internship.getRole());
-                    System.out.println(internship);
+                    Scene scene = new Scene(new InternshipView(internship), 500, 300);
+//                    System.out.println(internship.getApplicationStages());
+//                    stage.setMinWidth(500);
+//                    stage.setMinHeight(350);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+
+                    ((Node) event.getSource()).getScene().getWindow().hide();
                 }
             });
 
@@ -62,20 +72,9 @@ public class ApplicationsView extends Application {
 
         root.setCenter(vBox);
 
-        ScrollPane scrollPane = new ScrollPane(root);
-        scrollPane.setFitToHeight(true);
-        scrollPane.setFitToWidth(true);
+        setContent(root);
+        setFitToHeight(true);
+        setFitToWidth(true);
 
-
-        // A new WelcomeView scene which is the Main Menu
-        Scene scene = new Scene(scrollPane, 710, 300);
-        primaryStage.setMinWidth(550);
-        primaryStage.setMinHeight(450);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
