@@ -34,6 +34,24 @@ public class ApplicationStage {
         return date;
     }
 
+    public String getCurrentStatus() {
+        if(isCompleted) {
+            if(isWaitingForResponse) {
+                return "Waiting";
+            } else {
+                if(isSuccessful() != null) {
+                    if(isSuccessful) {
+                        return "Successful!";
+                    } else {
+                        return "Failed";
+                    }
+                } else return "Don't Know";
+            }
+        } else {
+            return "Not Completed";
+        }
+    }
+
     public String getStageName() {
         return stageName;
     }
