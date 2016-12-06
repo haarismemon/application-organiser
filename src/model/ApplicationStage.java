@@ -34,6 +34,26 @@ public class ApplicationStage {
         return date;
     }
 
+    public String getStageName() {
+        return stageName;
+    }
+
+    public Boolean getSuccessful() {
+        return isSuccessful;
+    }
+
+    public Date getDateOfStart() {
+        return dateOfStart;
+    }
+
+    public Date getDateOfCompletion() {
+        return dateOfCompletion;
+    }
+
+    public Date getDateOfReply() {
+        return dateOfReply;
+    }
+
     public void setStartDate(String dateOfStart) {
         this.dateOfStart = stringToDate(dateOfStart);
     }

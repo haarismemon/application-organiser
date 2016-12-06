@@ -25,12 +25,12 @@ public class Internship {
         applicationStages = new ArrayList<>();
     }
 
-    public String print() {
-        String s =  company.getName() + ": " + role + " - Current Stage: ";
+    public String printCurrentStage() {
+//        String s = company.getName() + ": " + role + " - Current Stage: ";
 
         ApplicationStage currentStage = getCurrentStage();
-        if(currentStage != null) s += currentStage;
-        else s+= "Not yet Applied";
+        if (currentStage != null) return currentStage.toString();
+        else return "Not yet Applied";
 
 //        s+= " - Applied On: ";
 //        if(dateApplied != null) {
@@ -39,7 +39,7 @@ public class Internship {
 //        }
 //        else s+= "Not yet";
 
-        return s;
+//        return s;
     }
 
     public ApplicationStage getCurrentStage() {
@@ -58,6 +58,7 @@ public class Internship {
 //        ApplicationStage onlineApplication = new ApplicationStage("Online Application");
 //        //if the user has applied, then online application is completed
 //        onlineApplication.setCompleted(true, dateApplied);
+
 //        //if the user has applied, and not specified the isSuccessful then they are waiting for a response.
 //        onlineApplication.setWaitingForResponse(true);
 //        addStage(onlineApplication);
@@ -72,6 +73,14 @@ public class Internship {
 
     public Company getCompany() {
         return company;
+    }
+
+    public String getCompanyName() {
+        return company.getName();
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public void addStage(ApplicationStage stage) {
@@ -94,4 +103,11 @@ public class Internship {
         return applicationStages;
     }
 
+    public String getLength() {
+        return length;
+    }
+
+    public String getLocation() {
+        return location;
+    }
 }
