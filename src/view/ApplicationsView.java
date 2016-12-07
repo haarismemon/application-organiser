@@ -53,7 +53,7 @@ public class ApplicationsView extends ScrollPane {
             bp.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    Scene scene = new Scene(new InternshipView(internship), 500, 300);
+                    Scene scene = new Scene(new InternshipView(internship), 710, 400);
 //                    System.out.println(internship.getApplicationStages());
 //                    stage.setMinWidth(500);
 //                    stage.setMinHeight(350);

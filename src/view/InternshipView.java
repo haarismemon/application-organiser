@@ -23,9 +23,11 @@ import model.ParseApplications;
  */
 public class InternshipView extends BorderPane {
 
+    private ParseApplications parseApplications;
     private Internship internship;
 
     public InternshipView(Internship internship) {
+        parseApplications = new ParseApplications();
         this.internship = internship;
 
         setUp();
@@ -42,7 +44,7 @@ public class InternshipView extends BorderPane {
         backBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                Scene scene = new Scene(new ApplicationsView(), 500, 300);
+                Scene scene = new Scene(new ApplicationsView(), 710, 400);
                 Stage stage = new Stage();
                 stage.setScene(scene);
                 stage.show();
@@ -50,7 +52,22 @@ public class InternshipView extends BorderPane {
                 ((Node) event.getSource()).getScene().getWindow().hide();
             }
         });
-        vBox.getChildren().add(backBtn);
+
+        Button editBtn = new Button("Edit Internship");
+        editBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Scene scene = new Scene(new EditInternshipView(parseApplications,  internship), 710, 400);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+
+                ((Node) event.getSource()).getScene().getWindow().hide();
+            }
+        });
+
+        HBox hBox = new HBox(backBtn, editBtn);
+        vBox.getChildren().add(hBox);
 
         for(ApplicationStage stage : internship.getApplicationStages()) {
 

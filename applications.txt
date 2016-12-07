@@ -8,9 +8,9 @@ Microsoft,Development Engineering Summer Internship,Year,Redmond USA\Online Appl
 Bank of America,Global Technology Industrial Placement,Year,London\Online Application,true,false,true,27/11/2016,22/11/2016,null\Online Test,true,true,null,27/11/2016,27/11/2016,null
 Credit Suisse,Technology Analyst Industrial Year,Year,London\Online Application,true,true,null,27/11/2016,27/11/2016,null
 Cognito iQ,Software Developer Industrial Placement,Year,Newbury\Online Application,true,true,null,30/11/2016,30/11/2016,null
-Atkins,Technology Industrial Placement,Year,Aldershot Bristol\Online Application,true,false,true,30/11/2016,30/11/2016,null\Online Test,true,true,null,30/11/2016,01/12/2016,null
-GE,Software Engineer Industrial Placement,Year,Various\Online Application,true,true,null,30/11/2016,30/11/2016,null\Online Test,true,true,null,02/11/2016,03/12/2016,null
-Viagogo,Intern Developer,Year,London\Online Application,true,true,null,01/12/2016,01/12/2016,null
+Atkins,Technology Industrial Placement,Year,Aldershot Bristol\Online Application,true,false,true,30/11/2016,30/11/2016,05/12/2016\Online Test,true,false,false,30/11/2016,01/12/2016,05/12/2016
+GE,Software Engineer Industrial Placement,Year,Various\Online Application,true,false,true,30/11/2016,30/11/2016,06/12/2016\Online Test,true,false,true,02/11/2016,03/12/2016,06/12/2016\Online Interview,false,false,null,06/12/2016,null,null
+Viagogo,Intern Developer,Year,London\Online Application,true,false,true,01/12/2016,01/12/2016,05/12/2016\Telephone Interview,false,false,null,06/12/2016,null,null
 Amazon,SDE video placement,11 Months,London\Online Application,true,true,null,01/12/2016,01/12/2016,null
 Amazon,SDE Placement,3-6 months,Edinburgh\Online Application,true,true,null,01/12/2016,01/12/2016,null
 Amazon,SDE summer internship,Summer,London\Online Application,true,true,null,01/12/2016,01/12/2016,null
@@ -19,6 +19,6 @@ Goldman Sachs,Tech Spring Insight Programme,Spring,London\Online Application,tru
 Bloomberg,Software Engineering Industrial Placement,3-6 months,Various\Online Application,true,true,null,01/12/2016,01/12/2016,null
 Google,Summer Trainee Engineering Program,Summer,London\Online Application,true,true,null,01/12/2016,01/12/2016,null
 Facebook,Software Engineer,Intern/Co-op Summer,Summer,London\Online Application,true,true,null,02/12/2016,02/12/2016,null
-Fujitsu,Software Developer Industrial Placement,Year,Various + European Travel\Online Application,true,true,null,02/12/2016,05/12/2016,null
+Fujitsu,Software Developer Industrial Placement,Year,Various + European Travel\Online Application,true,true,null,02/12/2016,05/12/2016,null\Online Test,false,false,null,06/12/2016,null,null
 Rolls Royce,Software Engineering Internship Programme,Year,Various\Online Application,true,true,null,02/12/2016,05/12/2016,null\Online Test,false,false,null,05/12/2016,null,null
 CA Technologies,Software Engineering Placement,Year,Datchet England\Email Application,true,true,null,05/12/2016,05/12/2016,null

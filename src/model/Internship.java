@@ -99,6 +99,14 @@ public class Internship {
         this.location = location;
     }
 
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public List<ApplicationStage> getApplicationStages() {
         return applicationStages;
     }

@@ -12,7 +12,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Internship Application Organiser");
 
-        Scene scene = new Scene(new ApplicationsView(), 710, 300);
+        Scene scene = new Scene(new ApplicationsView(), 710, 400);
         primaryStage.setMinWidth(550);
         primaryStage.setMinHeight(450);
         primaryStage.setScene(scene);

@@ -27,60 +27,7 @@ public class ParseApplications {
             String internshipLine = null;
 
             while((internshipLine = reader.readLine()) != null) {
-                String[] internshipStages = internshipLine.split("\\\\");
-
-                String[] internshipDetails = internshipStages[0].split(",");
-
-                String companyName = internshipDetails[0];
-                String role = internshipDetails[1];
-                String length = internshipDetails[2];
-                String location = internshipDetails[3];
-
-                Internship internship = new Internship(companyName, role);
-
-                if(!length.equals("null")) internship.setLength(length);
-                if(!location.equals("null")) internship.setLocation(location);
-
-                if(internshipStages.length > 1) {
-                    for(int i = 1; i < internshipStages.length; ++i) {
-                        String[] internshipStage = internshipStages[i].split(",");
-
-                        String stage_name = internshipStage[0];
-                        String is_completed = internshipStage[1];
-                        String is_waiting_for_response = internshipStage[2];
-                        String is_successful = internshipStage[3];
-                        String date_of_start = internshipStage[4];
-                        String date_of_completed = internshipStage[5];
-                        String date_of_reply = internshipStage[6];
-
-                        ApplicationStage stage = new ApplicationStage(stage_name);
-
-                        if(is_completed.equals("true")) {
-                            if(!date_of_completed.equals("null")) stage.setCompleted(true, date_of_completed);
-                            else stage.setCompleted(true);
-                        }
-                        else if(is_completed.equals("false")) stage.setCompleted(false);
-
-                        if(is_waiting_for_response.equals("true")) {
-//                            System.out.println("is waiting");
-                            stage.setWaitingForResponse(true);
-                        }
-                        else if(is_waiting_for_response.equals("false")) stage.setWaitingForResponse(false);
-
-//                        System.out.println(stage.isWaitingForResponse());
-
-                        if(is_successful.equals("true")) {
-                            if(!date_of_reply.equals("null")) stage.setSuccessful(true, date_of_reply);
-                            else stage.setSuccessful(true);
-                        }
-                        else if(is_successful.equals("false")) stage.setSuccessful(false);
-//                        else if(is_successful.equals("null")) stage.setSuccessful(null);
-
-                        if(!date_of_start.equals("null")) stage.setStartDate(date_of_start);
-
-                        internship.addStage(stage);
-                    }
-                }
+                Internship internship = parseInternship(internshipLine);
 
 //                System.out.println(companyName +" " +role + " "+ length + " " + location);
 
@@ -136,7 +83,7 @@ public class ParseApplications {
 
     }
 
-    private String formatDate(Date date) {
+    public static String formatDate(Date date) {
         if(date != null) {
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             return df.format(date);
@@ -145,6 +92,65 @@ public class ParseApplications {
 
     public Applications getApplications() {
         return applications;
+    }
+
+    public Internship parseInternship(String internshipLine) {
+        String[] internshipStages = internshipLine.split("\\\\");
+
+        String[] internshipDetails = internshipStages[0].split(",");
+
+        String companyName = internshipDetails[0];
+        String role = internshipDetails[1];
+        String length = internshipDetails[2];
+        String location = internshipDetails[3];
+
+        Internship internship = new Internship(companyName, role);
+
+        if(!length.equals("null")) internship.setLength(length);
+        if(!location.equals("null")) internship.setLocation(location);
+
+        if(internshipStages.length > 1) {
+            for(int i = 1; i < internshipStages.length; ++i) {
+                String[] internshipStage = internshipStages[i].split(",");
+
+                String stage_name = internshipStage[0];
+                String is_completed = internshipStage[1];
+                String is_waiting_for_response = internshipStage[2];
+                String is_successful = internshipStage[3];
+                String date_of_start = internshipStage[4];
+                String date_of_completed = internshipStage[5];
+                String date_of_reply = internshipStage[6];
+
+                ApplicationStage stage = new ApplicationStage(stage_name);
+
+                if(is_completed.equals("true")) {
+                    if(!date_of_completed.equals("null")) stage.setCompleted(true, date_of_completed);
+                    else stage.setCompleted(true);
+                }
+                else if(is_completed.equals("false")) stage.setCompleted(false);
+
+                if(is_waiting_for_response.equals("true")) {
+//                            System.out.println("is waiting");
+                    stage.setWaitingForResponse(true);
+                }
+                else if(is_waiting_for_response.equals("false")) stage.setWaitingForResponse(false);
+
+//                        System.out.println(stage.isWaitingForResponse());
+
+                if(is_successful.equals("true")) {
+                    if(!date_of_reply.equals("null")) stage.setSuccessful(true, date_of_reply);
+                    else stage.setSuccessful(true);
+                }
+                else if(is_successful.equals("false")) stage.setSuccessful(false, date_of_reply);
+//                        else if(is_successful.equals("null")) stage.setSuccessful(null);
+
+                if(!date_of_start.equals("null")) stage.setStartDate(date_of_start);
+
+                internship.addStage(stage);
+            }
+        }
+
+        return internship;
     }
 
     //    public static void main(String[] args) {
