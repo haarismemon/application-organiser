@@ -88,6 +88,7 @@ public class EditInternshipView extends ScrollPane {
         Button addBtn = new Button("Add Stage");
         Button deleteBtn = new Button("Delete");
         HBox hBox = new HBox(backBtn, saveBtn, addBtn, deleteBtn);
+        hBox.setSpacing(15);
         vBox.getChildren().add(hBox);
 
         GridPane companyEditGP = new GridPane();

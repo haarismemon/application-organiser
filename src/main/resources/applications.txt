@@ -24,3 +24,4 @@ Rolls Royce,Software Engineering Internship Programme,Year,Various\Online Applic
 CA Technologies,Software Engineering Placement,Year,Datchet England\Email Application,true,true,null,05/12/2016,05/12/2016,null
 IBM,Software Engineer Placement,1 Year,London
 Deutsche Bank,Tech Spring Insight,1 Week,London
+BT,Software Engineering Placement,1 Year,London\Online Application,true,false,false,22/12/2016,22/12/2016,22/12/2016\Online Test,true,false,false,22/12/2016,22/12/2016,22/12/2016

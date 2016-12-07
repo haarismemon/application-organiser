@@ -18,6 +18,16 @@ public class Applications {
         applications.add(addIntership);
     }
 
+    public List<Internship>  search(String searchQuery) {
+        List<Internship> internshipsFound = new ArrayList<>();
+        for(Internship internship : applications) {
+            if(internship.getCompanyName().toLowerCase().contains(searchQuery.toLowerCase()) || internship.getRole().toLowerCase().contains(searchQuery.toLowerCase())) {
+                internshipsFound.add(internship);
+            }
+        }
+        return internshipsFound;
+    }
+
     public List<Internship> getApplications() {
         return applications;
     }

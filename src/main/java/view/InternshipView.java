@@ -47,6 +47,7 @@ public class InternshipView extends ScrollPane {
         editBtn.setOnMouseClicked(new EditInternshipController(parseApplications, internship));
 
         HBox hBox = new HBox(backBtn, editBtn);
+        hBox.setSpacing(15);
         vBox.getChildren().add(hBox);
 
         GridPane companyInfoGP = new GridPane();
