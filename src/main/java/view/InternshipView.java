@@ -1,23 +1,24 @@
-package view;
+package main.java.view;
 
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
-import model.ApplicationStage;
-import model.Internship;
-import model.ParseApplications;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import main.java.controller.ApplicationController;
+import main.java.controller.EditInternshipController;
+import main.java.controller.StageController;
+import main.java.model.ApplicationStage;
+import main.java.model.ParseApplications;
+import main.java.model.Internship;
 
 
 /**
- * This class represents the view to see all the stages of an Internship.
+ * This class represents the java.view to see all the stages of an Internship.
  */
 public class InternshipView extends ScrollPane {
 
@@ -40,30 +41,10 @@ public class InternshipView extends ScrollPane {
 
 
         Button backBtn = new Button("Back");
-        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Scene scene = new Scene(new ApplicationsView(), 710, 400);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.show();
-
-                ((Node) event.getSource()).getScene().getWindow().hide();
-            }
-        });
+        backBtn.setOnMouseClicked(new ApplicationController());
 
         Button editBtn = new Button("Edit Internship");
-        editBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Scene scene = new Scene(new EditInternshipView(parseApplications,  internship), 710, 400);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.show();
-
-                ((Node) event.getSource()).getScene().getWindow().hide();
-            }
-        });
+        editBtn.setOnMouseClicked(new EditInternshipController(parseApplications, internship));
 
         HBox hBox = new HBox(backBtn, editBtn);
         vBox.getChildren().add(hBox);
@@ -90,17 +71,7 @@ public class InternshipView extends ScrollPane {
 
             vBox.getChildren().add(bp);
 
-            bp.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    Scene scene = new Scene(new StageView(internship, stage), 710, 400);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-
-                    ((Node) event.getSource()).getScene().getWindow().hide();
-                }
-            });
+            bp.setOnMouseClicked(new StageController(internship, stage));
             vBox.getChildren().add(new Separator());
         }
 

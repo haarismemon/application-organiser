@@ -1,8 +1,10 @@
-package view;
+package main.java;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import main.java.view.ApplicationsView;
 
 /**
  * Created by Haaris on 06/12/2016.

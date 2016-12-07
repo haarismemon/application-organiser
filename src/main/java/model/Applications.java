@@ -1,6 +1,4 @@
-package model;
-
-import model.Internship;
+package main.java.model;
 
 import java.util.ArrayList;
 import java.util.List;

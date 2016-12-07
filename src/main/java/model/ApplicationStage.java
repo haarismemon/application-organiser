@@ -1,11 +1,11 @@
-package model;
+package main.java.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * This class represents a particular model.ApplicationStage in the application process of an model.Internship.
+ * This class represents a particular ApplicationStage in the application process of an Internship.
  */
 public class ApplicationStage {
 

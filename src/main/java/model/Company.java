@@ -1,7 +1,7 @@
-package model;
+package main.java.model;
 
 /**
- * This class represents a model.Company that the user has applied to.
+ * This class represents a Company that the user has applied to.
  */
 public class Company {
 

@@ -1,14 +1,10 @@
-package model;
+package main.java.model;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
- * This class represents the model.Internship that a user has applied to.
+ * This class represents the Internship that a user has applied to.
  */
 public class Internship {
 
