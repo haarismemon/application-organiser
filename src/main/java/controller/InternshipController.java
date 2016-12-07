@@ -23,6 +23,7 @@ public class InternshipController implements EventHandler {
     public void handle(Event event) {
         Scene scene = new Scene(new InternshipView(internship), 710, 400);
         Stage stage = new Stage();
+        stage.setTitle("Internship Application Organiser");
         stage.setScene(scene);
         stage.show();
 

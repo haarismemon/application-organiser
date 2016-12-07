@@ -18,6 +18,7 @@ public class ApplicationController implements EventHandler {
     public void handle(Event event) {
         Scene scene = new Scene(new ApplicationsView(), 710, 400);
         Stage stage = new Stage();
+        stage.setTitle("Internship Application Organiser");
         stage.setScene(scene);
         stage.show();
 

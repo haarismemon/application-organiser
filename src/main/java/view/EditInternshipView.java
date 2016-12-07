@@ -6,10 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import main.java.controller.InternshipController;
 import main.java.model.ApplicationStage;
@@ -71,11 +68,16 @@ public class EditInternshipView extends ScrollPane {
                     newInternship.addStage(newStage);
                 }
 
-                parseApplications.updateInternshipCache(newInternship);
+                if(internship.getCompanyName().equals("") && internship.getRole().equals("")) {
+                    parseApplications.updateInternshipCache(newInternship.getCompanyName(), newInternship.getRole(), newInternship);
+                } else {
+                    parseApplications.updateInternshipCache(internship.getCompanyName(), internship.getRole(), newInternship);
+                }
                 internship = newInternship;
 
                 Scene scene = new Scene(new InternshipView(internship), 710, 400);
                 Stage stage = new Stage();
+                stage.setTitle("Internship Application Organiser");
                 stage.setScene(scene);
                 stage.show();
 
@@ -117,6 +119,7 @@ public class EditInternshipView extends ScrollPane {
 
                 Scene scene = new Scene(new ApplicationsView(), 710, 400);
                 Stage stage = new Stage();
+                stage.setTitle("Internship Application Organiser");
                 stage.setScene(scene);
                 stage.show();
 
@@ -139,6 +142,7 @@ public class EditInternshipView extends ScrollPane {
     private void addStageToVBox(ApplicationStage stage, VBox vBox) {
         Map<String, TextField> textfieldMap = new LinkedHashMap<>();
         GridPane gp = new GridPane();
+        Pane separatorPane = new Pane();
 
         TextField stageNameTextField = new TextField(stage.getStageName());
         textfieldMap.put("stageName", stageNameTextField);
@@ -171,7 +175,21 @@ public class EditInternshipView extends ScrollPane {
         gp.add(new Label("Date of completion: "), 0, 5);
         gp.add(new Label("Date of reply: "), 0, 6);
 
-        vBox.getChildren().addAll(gp, new Separator());
+        Button removeBtn = new Button("Remove");
+        gp.add(removeBtn, 2, 0);
+
+        separatorPane.getChildren().add(new Separator());
+
+        removeBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                internship.removeStage(stage);
+                gp.getChildren().clear();
+                separatorPane.getChildren().clear();
+            }
+        });
+
+        vBox.getChildren().addAll(gp, separatorPane);
     }
 
 }

@@ -38,7 +38,7 @@ public class ParseApplications {
         return applications;
     }
 
-    public void updateInternshipCache(Internship internship) {
+    public void updateInternshipCache(String companyName, String role, Internship internship) {
         String copyFileName = "";
 
         try {
@@ -53,7 +53,7 @@ public class ParseApplications {
             boolean foundInternship = false;
 
             while ((line = reader.readLine()) != null) {
-                if(line.contains(internship.getCompanyName() + "," + internship.getRole())) {
+                if(line.contains(companyName + "," + role)) {
                     line = internshipLine;
                     foundInternship = true;
                 }
@@ -174,7 +174,6 @@ public class ParseApplications {
             PrintWriter writer = new PrintWriter(new FileWriter(copyFileName));
 
             String line = null;
-            String internshipLine = makeInternshipLine(internship);
 
             while ((line = reader.readLine()) != null) {
                 if(line.contains(internship.getCompanyName() + "," + internship.getRole())) {

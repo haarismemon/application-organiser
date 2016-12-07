@@ -56,14 +56,6 @@ public class ApplicationStage {
         return stageName;
     }
 
-    public void setStageName(String stageName) {
-        this.stageName = stageName;
-    }
-
-    public Boolean getSuccessful() {
-        return isSuccessful;
-    }
-
     public Date getDateOfStart() {
         return dateOfStart;
     }

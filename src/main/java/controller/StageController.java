@@ -27,6 +27,7 @@ public class StageController implements EventHandler {
     public void handle(Event event) {
         Scene scene = new Scene(new StageView(internship, stage), 710, 400);
         Stage stage = new Stage();
+        stage.setTitle("Internship Application Organiser");
         stage.setScene(scene);
         stage.show();
 

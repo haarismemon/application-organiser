@@ -18,15 +18,6 @@ public class Applications {
         applications.add(addIntership);
     }
 
-    public void removeInternship(Internship removeIntership) {
-        int index = applications.indexOf(removeIntership);
-        if(index != -1) {
-            applications.remove(applications.indexOf(removeIntership));
-        } else {
-            System.out.println(removeIntership + " not in Applications list");
-        }
-    }
-
     public List<Internship> getApplications() {
         return applications;
     }
