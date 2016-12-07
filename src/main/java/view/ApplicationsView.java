@@ -78,13 +78,30 @@ public class ApplicationsView extends ScrollPane {
             }
         }
 
-        Label allLabel = new Label("All Applications");
+        Label allLabel = new Label("Current Applications");
         allLabel.setAlignment(Pos.CENTER);
         allLabel.setFont(new Font(new Label().getFont().getStyle(), 20));
         vBox.getChildren().add(allLabel);
 
         for(Internship internship : applications.getApplications()) {
-            addInternshipsToVBox(internship, vBox);
+            if(internship.getCurrentStage() != null) {
+                if(internship.getCurrentStage().isSuccessful() == null || internship.getCurrentStage().isSuccessful() == true) {
+                    addInternshipsToVBox(internship, vBox);
+                }
+            }
+        }
+
+        Label unsuccessfulLabel = new Label("Unsuccessful Applications");
+        unsuccessfulLabel.setAlignment(Pos.CENTER);
+        unsuccessfulLabel.setFont(new Font(new Label().getFont().getStyle(), 20));
+        vBox.getChildren().add(unsuccessfulLabel);
+
+        for(Internship internship : applications.getApplications()) {
+            if(internship.getCurrentStage() != null) {
+                if (!(internship.getCurrentStage().isSuccessful() == null || internship.getCurrentStage().isSuccessful() == true)) {
+                    addInternshipsToVBox(internship, vBox);
+                }
+            }
         }
 
         searchButton.setOnMouseClicked(new SearchApplicationsController());
