@@ -153,20 +153,4 @@ public class ParseApplications {
         return internship;
     }
 
-    //    public static void main(String[] args) {
-////        for(Internship i : ParseApplications.parse().getApplications()) {
-////            System.out.println(i.getCurrentStage());
-////        }
-//        ParseApplications.parse();
-//
-//        Internship internship = applications.getApplications().get(22);
-//
-////        ApplicationStage rollsTest = new ApplicationStage("Online Test");
-////        rollsTest.setStartDate("05/12/2016");
-////
-////        internship.addStage(rollsTest);
-//
-//        ParseApplications.updateInternshipCache(internship);
-//    }
-
 }

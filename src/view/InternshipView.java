@@ -9,19 +9,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Pair;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 import model.ApplicationStage;
-import model.Applications;
 import model.Internship;
 import model.ParseApplications;
+import model.StagePanePair;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class represents the view to see all the stages of an Internship.
  */
-public class InternshipView extends BorderPane {
+public class InternshipView extends ScrollPane {
 
     private ParseApplications parseApplications;
     private Internship internship;
@@ -34,11 +37,12 @@ public class InternshipView extends BorderPane {
     }
 
     private void setUp() {
-//        BorderPane root = new BorderPane();
+        BorderPane root = new BorderPane();
 
         VBox vBox = new VBox();
         vBox.setSpacing(7);
         vBox.setPadding(new Insets(10, 50, 10, 50));
+
 
         Button backBtn = new Button("Back");
         backBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -69,6 +73,18 @@ public class InternshipView extends BorderPane {
         HBox hBox = new HBox(backBtn, editBtn);
         vBox.getChildren().add(hBox);
 
+        GridPane companyInfoGP = new GridPane();
+        companyInfoGP.add(new Label("Company Name: "), 0,0);
+        companyInfoGP.add(new Label(internship.getCompany().getName()), 1,0);
+        companyInfoGP.add(new Label("Role: "), 0,1);
+        companyInfoGP.add(new Label(internship.getRole()), 1,1);
+        companyInfoGP.add(new Label("Length: "), 0,2);
+        companyInfoGP.add(new Label(internship.getLength()), 1,2);
+        companyInfoGP.add(new Label("Location: "), 0,3);
+        companyInfoGP.add(new Label(internship.getLocation()), 1,3);
+        vBox.getChildren().addAll(companyInfoGP, new Separator());
+
+
         for(ApplicationStage stage : internship.getApplicationStages()) {
 
             BorderPane bp = new BorderPane();
@@ -78,17 +94,26 @@ public class InternshipView extends BorderPane {
             bp.setRight(statusLabel);
 
             vBox.getChildren().add(bp);
-            vBox.getChildren().add(new Separator());
 
+            bp.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    Scene scene = new Scene(new StageView(internship, stage), 710, 400);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+
+                    ((Node) event.getSource()).getScene().getWindow().hide();
+                }
+            });
+            vBox.getChildren().add(new Separator());
         }
 
-        setCenter(vBox);
+        root.setCenter(vBox);
 
-//        root.setCenter(vBox);
-
-//        getChildren().add(root);
-//        setFitToHeight(true);
-//        setFitToWidth(true);
+        setContent(root);
+        setFitToHeight(true);
+        setFitToWidth(true);
     }
 
 }

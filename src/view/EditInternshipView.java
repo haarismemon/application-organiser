@@ -72,15 +72,6 @@ public class EditInternshipView extends ScrollPane {
 
                 for(ApplicationStage stage : stageUpdatedInfomation.keySet()) {
                     ApplicationStage newStage = new ApplicationStage(getString(stage, "stageName"));
-//                    s += "\\";
-//                    Map<String, String> data = stageUpdatedInfomation.get(stage);
-//                    s += data.get("stageName");
-//                    for(String label : data.keySet()) {
-//                        if(label.equals("companyName"))
-//                    }
-//                    Map<String, TextField> textfieldMap = stageUpdatedInfomation.get(stage);
-//                    s += "\\" + stage.getStageName()+","+stage.isCompleted()+","+stage.isWaitingForResponse()+","+stage.isSuccessful()+","
-//                            + formatDate(stage.getDateOfStart()) + "," + formatDate(stage.getDateOfCompletion()) + "," + formatDate(stage.getDateOfReply());
 
 //                    String stage_name = getString(stage, "stageName");
                     String is_completed = getString(stage, "isCompleted");
@@ -90,9 +81,7 @@ public class EditInternshipView extends ScrollPane {
                     String date_of_completed = getString(stage, "completedDate");
                     String date_of_reply = getString(stage, "replyDate");
 
-                    System.out.println("date_of_reply: " + date_of_reply);
-                    
-                    
+
                     if(is_completed.equals("true")) {
                         if(!date_of_completed.equals("null")) newStage.setCompleted(true, date_of_completed);
                         else newStage.setCompleted(true);
@@ -100,12 +89,9 @@ public class EditInternshipView extends ScrollPane {
                     else if(is_completed.equals("false")) newStage.setCompleted(false);
 
                     if(is_waiting.equals("true")) {
-//                            System.out.println("is waiting");
                         newStage.setWaitingForResponse(true);
                     }
                     else if(is_waiting.equals("false")) newStage.setWaitingForResponse(false);
-
-//                        System.out.println(newStage.isWaitingForResponse());
 
                     if(is_successful.equals("true")) {
                         if(!date_of_reply.equals("null")) newStage.setSuccessful(true, date_of_reply);
@@ -115,27 +101,12 @@ public class EditInternshipView extends ScrollPane {
 //                        else if(is_successful.equals("null")) newStage.setSuccessful(null);
 
                     if(!date_of_start.equals("null")) newStage.setStartDate(date_of_start);
-                    
-//                    s += "\\" + getString(newStage, "newStageName")+","+getString(newStage, "isCompleted")+","+getString(newStage, "isWaiting")+","
-//                            +getString(newStage, "isSuccessful")+","+ getString(newStage, "startDate")+","+ getString(newStage, "completedDate")+ ","
-//                            +getString(newStage, "replyDate");
-
-//                    System.out.println(internship.getCompanyName());
-                    System.out.println(newStage.getDateOfReply());
 
                     newInternship.addStage(newStage);
                 }
 
-//                String s = newInternship.getCompanyName()+ ","+newInternship.getRole()+","+newInternship.getLength()+","+newInternship.getLocation();
-//
-//                for(ApplicationStage newStage : newInternship.getApplicationStages()) {
-//                    s += "\\" + newStage.getStageName()+","+newStage.isCompleted()+","+newStage.isWaitingForResponse()+","+newStage.isSuccessful()+","
-//                            + ParseApplications.formatDate(newStage.getDateOfStart()) + "," + ParseApplications.formatDate(newStage.getDateOfCompletion()) + ","
-//                            + ParseApplications.formatDate(newStage.getDateOfReply());
-//                }
-//
-//                System.out.println(s);
                 parseApplications.updateInternshipCache(newInternship);
+                internship = newInternship;
 
                 goBackToInternshipView(event);
             }

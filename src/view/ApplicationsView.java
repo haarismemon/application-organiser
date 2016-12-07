@@ -3,6 +3,7 @@ package view;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -12,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.Applications;
 import model.Internship;
@@ -36,6 +38,11 @@ public class ApplicationsView extends ScrollPane {
 
         ParseApplications parseApplications = new ParseApplications();
         Applications applications = parseApplications.getApplications();
+
+        Label heading = new Label("Applications");
+        heading.setAlignment(Pos.CENTER);
+        heading.setFont(new Font(new Label().getFont().getStyle(), 30));
+        vBox.getChildren().add(heading);
 
 
         for(Internship internship : applications.getApplications()) {
