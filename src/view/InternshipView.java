@@ -11,15 +11,10 @@ import javafx.scene.control.Separator;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.util.Pair;
-import jdk.nashorn.internal.ir.annotations.Immutable;
 import model.ApplicationStage;
 import model.Internship;
 import model.ParseApplications;
-import model.StagePanePair;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class represents the view to see all the stages of an Internship.

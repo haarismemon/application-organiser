@@ -44,6 +44,48 @@ public class ApplicationsView extends ScrollPane {
         heading.setFont(new Font(new Label().getFont().getStyle(), 30));
         vBox.getChildren().add(heading);
 
+        Label requireActionLabel = new Label("Require Action");
+        requireActionLabel.setAlignment(Pos.CENTER);
+        requireActionLabel.setFont(new Font(new Label().getFont().getStyle(), 20));
+        vBox.getChildren().add(requireActionLabel);
+
+        //add internships that require action
+        for(Internship internship : applications.getApplications()) {
+            if(!internship.getCurrentStage().isCompleted()) {
+                BorderPane bp = new BorderPane();
+                HBox hBox = new HBox();
+                Label companyLabel = new Label(internship.getCompanyName());
+                companyLabel.setMinWidth(150);
+                hBox.getChildren().add(companyLabel);
+                Label roleLabel = new Label(internship.getRole());
+                hBox.getChildren().add(roleLabel);
+                bp.setCenter(hBox);
+                bp.setRight(new Label(internship.printCurrentStage()));
+
+                bp.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        Scene scene = new Scene(new InternshipView(internship), 710, 400);
+//                    System.out.println(internship.getApplicationStages());
+//                    stage.setMinWidth(500);
+//                    stage.setMinHeight(350);
+                        Stage stage = new Stage();
+                        stage.setScene(scene);
+                        stage.show();
+
+                        ((Node) event.getSource()).getScene().getWindow().hide();
+                    }
+                });
+
+                vBox.getChildren().add(bp);
+                vBox.getChildren().add(new Separator());
+            }
+        }
+
+        Label allLabel = new Label("All Applications");
+        allLabel.setAlignment(Pos.CENTER);
+        allLabel.setFont(new Font(new Label().getFont().getStyle(), 20));
+        vBox.getChildren().add(allLabel);
 
         for(Internship internship : applications.getApplications()) {
 
