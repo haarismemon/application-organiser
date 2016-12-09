@@ -185,6 +185,7 @@ public class EditInternshipView extends ScrollPane {
             @Override
             public void handle(MouseEvent event) {
                 internship.removeStage(stage);
+                stageUpdatedInfomation.remove(stage);
                 gp.getChildren().clear();
                 separatorPane.getChildren().clear();
             }
