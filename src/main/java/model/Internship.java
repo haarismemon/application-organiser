@@ -70,4 +70,11 @@ public class Internship {
     public String getLocation() {
         return location;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean isSameCompanyName = getCompanyName().equals(((Internship) obj).getCompanyName());
+        boolean isSameRole = getRole().equals(((Internship) obj).getRole());
+        return isSameCompanyName && isSameRole;
+    }
 }

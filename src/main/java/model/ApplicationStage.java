@@ -131,4 +131,8 @@ public class ApplicationStage {
         return s;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return stageName.equals(((ApplicationStage) obj).getStageName());
+    }
 }
