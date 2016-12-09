@@ -64,14 +64,14 @@ public class SearchApplicationsView extends ScrollPane {
             @Override
             public void handle(KeyEvent event) {
 
-                if (event.getCode().equals(KeyCode.ENTER)) {
+//                if (event.getCode().equals(KeyCode.ENTER)) {
                     searchResults.getChildren().clear();
 
                     List<Internship> searchedIntership = applications.search(searchTF.getText());
                     for(Internship internship : searchedIntership) {
                         addInternshipsToVBox(internship, searchResults);
                     }
-                }
+//                }
             }
         });
 

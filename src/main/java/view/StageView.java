@@ -7,6 +7,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import main.java.controller.InternshipController;
 import main.java.model.ApplicationStage;
 import main.java.model.ParseApplications;
@@ -41,21 +42,75 @@ public class StageView extends ScrollPane {
         vBox.getChildren().add(backBtn);
 
         GridPane gp = new GridPane();
-        gp.add(new Label("Stage Name: "), 0, 0);
-        gp.add(new Label("Completed?: "), 0, 1);
-        gp.add(new Label("Waiting for Response?: "), 0, 2);
-        gp.add(new Label("Successful?: "), 0, 3);
-        gp.add(new Label("Date of start: "), 0, 4);
-        gp.add(new Label("Date of completion: "), 0, 5);
-        gp.add(new Label("Date of reply: "), 0, 6);
-        gp.add(new Label(stage.getStageName()), 1, 0);
-        gp.add(new Label("" + stage.isCompleted()), 1, 1);
-        gp.add(new Label("" + stage.isWaitingForResponse()), 1, 2);
-        gp.add(new Label("" + stage.isSuccessful()), 1, 3);
-        gp.add(new Label(ParseApplications.formatDate(stage.getDateOfStart())), 1, 4);
-        gp.add(new Label(ParseApplications.formatDate(stage.getDateOfCompletion())), 1, 5);
-        gp.add(new Label(ParseApplications.formatDate(stage.getDateOfReply())), 1, 6);
+        gp.setPadding(new Insets(10, 0, 0, 0));
+        gp.setHgap(30);
+        gp.setVgap(15);
 
+        Font stageFont = new Font("Regular", 18);
+
+        Label stageTitle = new Label("Stage Name: ");
+        gp.add(stageTitle, 0, 0);
+        Label completedTitle = new Label("Completed?: ");
+        gp.add(completedTitle, 0, 1);
+        Label waitingTitle = new Label("Waiting for Response?: ");
+        gp.add(waitingTitle, 0, 2);
+        Label successfulTitle = new Label("Successful?: ");
+        gp.add(successfulTitle, 0, 3);
+        Label startDateTitle = new Label("Date of start: ");
+        gp.add(startDateTitle, 0, 4);
+        Label completionDateTitle = new Label("Date of completion: ");
+        gp.add(completionDateTitle, 0, 5);
+        Label replyDateTitle = new Label("Date of reply: ");
+        gp.add(replyDateTitle, 0, 6);
+
+        Label stageLabel = new Label(stage.getStageName());
+        gp.add(stageLabel, 1, 0);
+        Label completedLabel;
+        if(stage.isCompleted()) completedLabel = new Label("Yes");
+        else completedLabel = new Label("No");
+        gp.add(completedLabel, 1, 1);
+
+        Label waitingLabel;
+        if(stage.isWaitingForResponse()) waitingLabel = new Label("Yes");
+        else waitingLabel = new Label("No");
+        gp.add(waitingLabel, 1, 2);
+
+        Label successfulLabel;
+        if(stage.isSuccessful() == null) successfulLabel = new Label("-");
+        else if (stage.isSuccessful()) successfulLabel = new Label("Yes");
+        else successfulLabel = new Label("No");
+        gp.add(successfulLabel, 1, 3);
+
+        Label startDateLabel;
+        if(stage.getDateOfStart() == null) startDateLabel = new Label("-");
+        else startDateLabel = new Label(ParseApplications.formatDate(stage.getDateOfStart()));
+        gp.add(startDateLabel, 1, 4);
+
+        Label completionDateLabel;
+        if(stage.getDateOfCompletion() == null) completionDateLabel = new Label("-");
+        else completionDateLabel = new Label(ParseApplications.formatDate(stage.getDateOfCompletion()));
+        gp.add(completionDateLabel, 1, 5);
+
+        Label replyDateLabel;
+        if(stage.getDateOfReply() == null) replyDateLabel = new Label("-");
+        else replyDateLabel = new Label(ParseApplications.formatDate(stage.getDateOfReply()));
+        gp.add(replyDateLabel, 1, 6);
+
+        stageTitle.setFont(stageFont);
+        completedTitle.setFont(stageFont);
+        waitingTitle.setFont(stageFont);
+        successfulTitle.setFont(stageFont);
+        startDateTitle.setFont(stageFont);
+        completionDateTitle.setFont(stageFont);
+        replyDateTitle.setFont(stageFont);
+        stageLabel.setFont(stageFont);
+        completedLabel.setFont(stageFont);
+        waitingLabel.setFont(stageFont);
+        successfulLabel.setFont(stageFont);
+        startDateLabel.setFont(stageFont);
+        completionDateLabel.setFont(stageFont);
+        replyDateLabel.setFont(stageFont);
+        
         vBox.getChildren().add(gp);
 
 

@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import main.java.controller.ApplicationController;
 import main.java.controller.EditInternshipController;
 import main.java.controller.StageController;
@@ -50,23 +51,47 @@ public class InternshipView extends ScrollPane {
         hBox.setSpacing(15);
         vBox.getChildren().add(hBox);
 
+        Font companyFont = new Font("Regular", 18);
+
         GridPane companyInfoGP = new GridPane();
-        companyInfoGP.add(new Label("Company Name: "), 0,0);
-        companyInfoGP.add(new Label(internship.getCompany().getName()), 1,0);
-        companyInfoGP.add(new Label("Role: "), 0,1);
-        companyInfoGP.add(new Label(internship.getRole()), 1,1);
-        companyInfoGP.add(new Label("Length: "), 0,2);
-        companyInfoGP.add(new Label(internship.getLength()), 1,2);
-        companyInfoGP.add(new Label("Location: "), 0,3);
-        companyInfoGP.add(new Label(internship.getLocation()), 1,3);
+        companyInfoGP.setPadding(new Insets(10, 0, 0, 0));
+        companyInfoGP.setHgap(30);
+
+        Label companyNameTitle = new Label("Company Name: ");
+        companyInfoGP.add(companyNameTitle, 0,0);
+        Label companyNameLabel = new Label(internship.getCompany().getName());
+        companyInfoGP.add(companyNameLabel, 1,0);
+        Label roleTitle = new Label("Role: ");
+        companyInfoGP.add(roleTitle, 0,1);
+        Label roleLabel = new Label(internship.getRole());
+        companyInfoGP.add(roleLabel, 1,1);
+        Label lengthTitle = new Label("Length: ");
+        companyInfoGP.add(lengthTitle, 0,2);
+        Label lengthLabel = new Label(internship.getLength());
+        companyInfoGP.add(lengthLabel, 1,2);
+        Label locationTitle = new Label("Location: ");
+        companyInfoGP.add(locationTitle, 0,3);
+        Label locationLabel = new Label(internship.getLocation());
+        companyInfoGP.add(locationLabel, 1,3);
         vBox.getChildren().addAll(companyInfoGP, new Separator());
 
+        companyNameTitle.setFont(companyFont);
+        roleTitle.setFont(companyFont);
+        lengthTitle.setFont(companyFont);
+        locationTitle.setFont(companyFont);
+        companyNameLabel.setFont(companyFont);
+        roleLabel.setFont(companyFont);
+        lengthLabel.setFont(companyFont);
+        locationLabel.setFont(companyFont);
 
         for(ApplicationStage stage : internship.getApplicationStages()) {
+            Font stageFont = new Font("Regular", 14);
 
             BorderPane bp = new BorderPane();
             Label stageNameLabel = new Label(stage.getStageName());
             Label statusLabel = new Label(stage.getCurrentStatus());
+            stageNameLabel.setFont(stageFont);
+            statusLabel.setFont(stageFont);
             bp.setLeft(stageNameLabel);
             bp.setRight(statusLabel);
 
