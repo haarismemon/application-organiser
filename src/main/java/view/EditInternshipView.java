@@ -16,6 +16,7 @@ import main.java.model.ParseApplications;
 import main.java.model.Internship;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -64,6 +65,7 @@ public class EditInternshipView extends ScrollPane {
 
         companyEditGP.add(new Label("Company Name: "), 0,0);
         companyEditGP.add(companyNameTextField = new TextField(internship.getCompany().getName()), 1,0);
+        companyNameTextField.setPrefWidth(300);
         companyEditGP.add(new Label("Role: "), 0,1);
         companyEditGP.add(roleTextField = new TextField(internship.getRole()), 1,1);
         companyEditGP.add(new Label("Length: "), 0,2);
@@ -184,21 +186,7 @@ public class EditInternshipView extends ScrollPane {
         completedHBox.getChildren().addAll(yesCompletedRB, noCompletedRB);
         gp.add(completedHBox, 1, 1);
         textfieldAndRadioMap.put("isCompleted", completedGroup);
-        if(stage.isCompleted()) yesCompletedRB.setSelected(true);
-        else noCompletedRB.setSelected(true);
 
-//        completedGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-//                if(completedGroup.getSelectedToggle() != null) {
-//                    if((boolean) completedGroup.getSelectedToggle().getUserData()) {
-//                        System.out.println("Completed");
-//                    } else {
-//                        System.out.println("Not completed");
-//                    }
-//                }
-//            }
-//        });
         ToggleGroup waitingGroup = new ToggleGroup();
         RadioButton yesWaitingRB = new RadioButton("Yes");
         yesWaitingRB.setUserData(true);
@@ -211,8 +199,6 @@ public class EditInternshipView extends ScrollPane {
         waitingHBox.getChildren().addAll(yesWaitingRB, noWaitingRB);
         gp.add(waitingHBox, 1, 2);
         textfieldAndRadioMap.put("isWaiting", waitingGroup);
-        if(stage.isWaitingForResponse()) yesWaitingRB.setSelected(true);
-        else noWaitingRB.setSelected(true);
 
         ToggleGroup successfulGroup = new ToggleGroup();
         RadioButton yesSuccessfulRB = new RadioButton("Yes");
@@ -229,19 +215,19 @@ public class EditInternshipView extends ScrollPane {
         successfulHBox.getChildren().addAll(yesSuccessfulRB, noSuccessfulRB, nullSuccessfulRB);
         gp.add(successfulHBox, 1, 3);
         textfieldAndRadioMap.put("isSuccessful", successfulGroup);
-        if(stage.isSuccessful() == null) nullSuccessfulRB.setSelected(true);
-        else if(stage.isSuccessful()) yesSuccessfulRB.setSelected(true);
-        else noSuccessfulRB.setSelected(true);
 
         TextField startDateTextField = new TextField();
+        startDateTextField.setPromptText("dd/mm/yyyy");
         if(stage.getDateOfStart() != null) startDateTextField.setText("" + ParseApplications.formatDate(stage.getDateOfStart()));
         textfieldAndRadioMap.put("startDate", startDateTextField);
         gp.add(startDateTextField, 1, 4);
         TextField completedDateTextField = new TextField();
+        completedDateTextField.setPromptText("dd/mm/yyyy");
         if(stage.getDateOfCompletion() != null) completedDateTextField.setText("" + ParseApplications.formatDate(stage.getDateOfCompletion()));
         textfieldAndRadioMap.put("completedDate", completedDateTextField);
         gp.add(completedDateTextField, 1, 5);
         TextField replyDateTextField = new TextField();
+        replyDateTextField.setPromptText("dd/mm/yyyy");
         if(stage.getDateOfReply() != null) replyDateTextField.setText("" + ParseApplications.formatDate(stage.getDateOfReply()));
         textfieldAndRadioMap.put("replyDate", replyDateTextField);
         gp.add(replyDateTextField, 1, 6);
@@ -277,7 +263,84 @@ public class EditInternshipView extends ScrollPane {
             }
         });
 
+        completedGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                if(completedGroup.getSelectedToggle() != null && successfulGroup.getSelectedToggle() != null) {
+                    if((boolean) completedGroup.getSelectedToggle().getUserData()) {
+                        completedDateTextField.setDisable(false);
+                        if(successfulGroup.getSelectedToggle().getUserData() == null) {
+                            replyDateTextField.setDisable(true);
+                        } else {
+                            replyDateTextField.setDisable(false);
+                        }
+                    } else {
+                        completedDateTextField.setDisable(true);
+                        replyDateTextField.setDisable(true);
+                        waitingGroup.selectToggle(switchToggles(false, waitingGroup));
+                        successfulGroup.selectToggle(switchToggles(null, successfulGroup));
+                        completedGroup.selectToggle(switchToggles(false, completedGroup));
+
+                    }
+                }
+            }
+        });
+
+        waitingGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                if(waitingGroup.getSelectedToggle() != null && completedGroup.getSelectedToggle() != null) {
+                    if((boolean) completedGroup.getSelectedToggle().getUserData()) {
+                        if((boolean) waitingGroup.getSelectedToggle().getUserData()) {
+                            replyDateTextField.setDisable(true);
+                        } else {
+                            replyDateTextField.setDisable(false);
+                        }
+                        completedDateTextField.setDisable(false);
+                    } else {
+                        completedDateTextField.setDisable(true);
+                        replyDateTextField.setDisable(true);
+                    }
+                }
+            }
+        });
+
+        successfulGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                if(successfulGroup.getSelectedToggle() != null && completedGroup
+                        .getSelectedToggle() != null) {
+                    if((successfulGroup.getSelectedToggle().getUserData()) == null && ((boolean) completedGroup.getSelectedToggle().getUserData())){
+//                        completedGroup.selectToggle(switchToggles(false, completedGroup));
+                        waitingGroup.selectToggle(switchToggles(true, waitingGroup));
+                    } else {
+                        completedGroup.selectToggle(switchToggles(true, completedGroup));
+                        waitingGroup.selectToggle(switchToggles(false, waitingGroup));
+                    }
+                }
+            }
+        });
+
+        if(stage.isSuccessful() == null) nullSuccessfulRB.setSelected(true);
+        else if(stage.isSuccessful()) yesSuccessfulRB.setSelected(true);
+        else noSuccessfulRB.setSelected(true);
+
+        if(stage.isWaitingForResponse()) yesWaitingRB.setSelected(true);
+        else noWaitingRB.setSelected(true);
+
+        if(stage.isCompleted()) yesCompletedRB.setSelected(true);
+        else noCompletedRB.setSelected(true);
+
         vBox.getChildren().addAll(gp, separatorPane);
+    }
+
+    private Toggle switchToggles(Boolean booleanUserData, ToggleGroup toggleGroup) {
+        for(Toggle toggle : toggleGroup.getToggles()) {
+            if((toggle.getUserData()) == booleanUserData) {
+                return toggle;
+            }
+        }
+        return null;
     }
 
 }

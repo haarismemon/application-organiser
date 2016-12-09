@@ -55,7 +55,7 @@ public class InternshipView extends ScrollPane {
 
         GridPane companyInfoGP = new GridPane();
         companyInfoGP.setPadding(new Insets(10, 0, 0, 0));
-        companyInfoGP.setHgap(30);
+        companyInfoGP.setHgap(50);
 
         Label companyNameTitle = new Label("Company Name: ");
         companyInfoGP.add(companyNameTitle, 0,0);

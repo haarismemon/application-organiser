@@ -42,7 +42,6 @@ public class SearchApplicationsView extends ScrollPane {
         heading.setFont(new Font(new Label().getFont().getStyle(), 30));
         TextField searchTF = new TextField();
         searchTF.setPromptText("search");
-        searchTF.setFocusTraversable(false);
         searchTF.setMaxSize(250, 20);
         Button backBtn = new Button("Back");
         backBtn.setOnMouseClicked(new ApplicationController());
