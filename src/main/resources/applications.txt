@@ -23,5 +23,5 @@ Fujitsu,Software Developer Industrial Placement,Year,Various + European Travel\O
 Rolls Royce,Software Engineering Internship Programme,Year,Various\Online Application,true,true,null,02/12/2016,05/12/2016,null\Online Test,true,true,null,05/12/2016,07/12/2016,null
 CA Technologies,Software Engineering Placement,Year,Datchet England\Email Application,true,true,null,05/12/2016,05/12/2016,null
 IBM,Software Engineer Placement,1 Year,London
-Deutsche Bank,Tech Spring Insight,1 Week,London\Online Application,false,false,null,09/12/2016,null,null
+Deutsche Bank,Tech Spring Insight,1 Week,London\Online Application,false,false,null,null,null,null
 BT,Software Engineering Placement,1 Year,London\Online Application,true,false,false,22/12/2016,22/12/2016,22/12/2016\Online Test,true,false,false,22/12/2016,22/12/2016,22/12/2016

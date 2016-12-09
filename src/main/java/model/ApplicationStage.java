@@ -24,13 +24,14 @@ public class ApplicationStage {
     private Date stringToDate(String dateString) {
         Date date = null;
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        try{
-            date = dateFormat.parse(dateString);
-        } catch(ParseException e) {
-            System.out.println("The date supplied is incorrect, date is set to null");
+        if(!dateString.equals("")) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                date = dateFormat.parse(dateString);
+            } catch (ParseException e) {
+                System.out.println("The date supplied is incorrect, date is set to null");
+            }
         }
-
         return date;
     }
 
