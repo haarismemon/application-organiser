@@ -123,8 +123,8 @@ public class ParseApplications {
         if(!length.equals("null")) internship.setLength(length);
         if(!location.equals("null")) internship.setLocation(location);
         if(!deadlineDate.equals("null")) internship.setDeadlineDate(deadlineDate);
-        if(!link.equals("null")) internship.setLocation(link);
-        if(!description.equals("null")) internship.setLocation(description);
+        if(!link.equals("null")) internship.setLink(link);
+        if(!description.equals("null")) internship.setDescription(description);
 
         if(internshipStages.length > 1) {
             for(int i = 1; i < internshipStages.length; ++i) {
@@ -140,13 +140,15 @@ public class ParseApplications {
     }
 
     private String makeInternshipLine(Internship internship) {
-        String s = internship.getCompanyName()+ ","+internship.getRole()+","+internship.getLength()+","+internship.getLocation()
-                   + formatDate(internship.getDeadlineDate()) + internship.getLink() + internship.getDescription();
+        String s = internship.getCompanyName()+ ","+internship.getRole()+","+internship.getLength()+","+internship.getLocation()+","
+                   + formatDate(internship.getDeadlineDate())+"," + internship.getLink()+"," + internship.getDescription();
 
         for(ApplicationStage stage : internship.getApplicationStages()) {
             s += "\\" + stage.getStageName()+","+stage.isCompleted()+","+stage.isWaitingForResponse()+","+stage.isSuccessful()+","
                     + formatDate(stage.getDateOfStart()) + "," + formatDate(stage.getDateOfCompletion()) + "," + formatDate(stage.getDateOfReply());
         }
+
+        System.out.println(s);
 
         return s;
     }

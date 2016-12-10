@@ -78,9 +78,11 @@ public class EditInternshipView extends ScrollPane {
         companyEditGP.add(new Label("Due Date: "), 0,4);
         companyEditGP.add(deadlineDateTextField = new TextField(ParseApplications.formatDate(internship.getDeadlineDate())), 1,4);
         companyEditGP.add(new Label("Link: "), 0,5);
-        companyEditGP.add(linkTextField = new TextField(ParseApplications.formatDate(internship.getDeadlineDate())), 1,5);
+        companyEditGP.add(linkTextField = new TextField(internship.getLink()), 1,5);
         companyEditGP.add(new Label("Description: "), 0,6);
-        companyEditGP.add(descriptionTextField = new TextArea(ParseApplications.formatDate(internship.getDeadlineDate())), 1,6);
+        String description = "";
+        if(internship.getDescription() != null) description = internship.getDescription().replace("*~+", ",");
+        companyEditGP.add(descriptionTextField = new TextArea(description), 1,6);
         descriptionTextField.setPrefSize(500, 50);
         vBox.getChildren().addAll(companyEditGP, new Separator());
 
@@ -99,11 +101,18 @@ public class EditInternshipView extends ScrollPane {
             @Override
             public void handle(MouseEvent event) {
                 Internship newInternship = new Internship(companyNameTextField.getText(), roleTextField.getText());
-                newInternship.setLength(lengthTextField.getText());
-                newInternship.setLocation(locationTextField.getText());
-                newInternship.setDeadlineDate(deadlineDateTextField.getText());
-                newInternship.setLocation(linkTextField.getText());
-                newInternship.setLocation(descriptionTextField.getText());
+                if(lengthTextField.getText().equals("")) newInternship.setLength(null);
+                else newInternship.setLength(lengthTextField.getText());
+                if(locationTextField.getText().equals("")) newInternship.setLocation(null);
+                else newInternship.setLocation(locationTextField.getText());
+                if(deadlineDateTextField.getText().equals("")) newInternship.setDeadlineDate(null);
+                else newInternship.setDeadlineDate(deadlineDateTextField.getText());
+                if(linkTextField.getText().equals("")) newInternship.setLink(null);
+                else newInternship.setLink(linkTextField.getText());
+                if(descriptionTextField.getText().equals("")) newInternship.setDescription(null);
+                else { String description = descriptionTextField.getText().replace(",","*~+");
+                    newInternship.setDescription(description);
+                }
 
                 for(ApplicationStage stage : stageUpdatedInfomation.keySet()) {
 

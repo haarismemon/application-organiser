@@ -1,18 +1,30 @@
 package main.java.view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import main.java.controller.ApplicationController;
 import main.java.controller.EditInternshipController;
 import main.java.controller.StageController;
 import main.java.model.ApplicationStage;
 import main.java.model.ParseApplications;
 import main.java.model.Internship;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 /**
@@ -75,13 +87,36 @@ public class InternshipView extends ScrollPane {
         companyInfoGP.add(deadlineTitle, 0,4);
         Label deadlineLabel = new Label(ParseApplications.formatDate(internship.getDeadlineDate()));
         companyInfoGP.add(deadlineLabel, 1,4);
+
+
+        WebView browser = new WebView();
+        WebEngine webEngine = browser.getEngine();
         Label linkTitle = new Label("Link: ");
         companyInfoGP.add(linkTitle, 0,5);
-        Hyperlink linkLabel = new Hyperlink(internship.getLink());
+        Hyperlink linkLabel = new Hyperlink("Click here!");
         companyInfoGP.add(linkLabel, 1,5);
+        linkLabel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Desktop desktop = Desktop.getDesktop();
+                if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                    try {
+                        desktop.browse(new URI(internship.getLink()));
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
         Label descriptionTitle = new Label("Description: ");
         companyInfoGP.add(descriptionTitle, 0,6);
-        Label descriptionLabel = new Label(internship.getDescription());
+        String description = "-";
+        if(internship.getDescription() != null) description = internship.getDescription().replace("*~+", ",");
+        Label descriptionLabel = new Label(description);
         companyInfoGP.add(descriptionLabel, 1,6);
         vBox.getChildren().addAll(companyInfoGP, new Separator());
 
