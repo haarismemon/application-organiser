@@ -2,6 +2,7 @@ package main.java.model;
 
 import java.io.*;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -86,6 +87,20 @@ public class ParseApplications {
         } else return "null";
     }
 
+    public static Date stringToDate(String dateString) {
+        Date date = null;
+
+        if(!dateString.equals("") && !dateString.equals("null")) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                date = dateFormat.parse(dateString);
+            } catch (ParseException e) {
+                System.out.println("The date supplied is incorrect, date is set to null");
+            }
+        }
+        return date;
+    }
+
     public Applications getApplications() {
         return applications;
     }
@@ -99,11 +114,17 @@ public class ParseApplications {
         String role = internshipDetails[1];
         String length = internshipDetails[2];
         String location = internshipDetails[3];
+        String deadlineDate = internshipDetails[4];
+        String link = internshipDetails[5];
+        String description = internshipDetails[6];
 
         Internship internship = new Internship(companyName, role);
 
         if(!length.equals("null")) internship.setLength(length);
         if(!location.equals("null")) internship.setLocation(location);
+        if(!deadlineDate.equals("null")) internship.setDeadlineDate(deadlineDate);
+        if(!link.equals("null")) internship.setLocation(link);
+        if(!description.equals("null")) internship.setLocation(description);
 
         if(internshipStages.length > 1) {
             for(int i = 1; i < internshipStages.length; ++i) {
@@ -119,7 +140,8 @@ public class ParseApplications {
     }
 
     private String makeInternshipLine(Internship internship) {
-        String s = internship.getCompanyName()+ ","+internship.getRole()+","+internship.getLength()+","+internship.getLocation();
+        String s = internship.getCompanyName()+ ","+internship.getRole()+","+internship.getLength()+","+internship.getLocation()
+                   + formatDate(internship.getDeadlineDate()) + internship.getLink() + internship.getDescription();
 
         for(ApplicationStage stage : internship.getApplicationStages()) {
             s += "\\" + stage.getStageName()+","+stage.isCompleted()+","+stage.isWaitingForResponse()+","+stage.isSuccessful()+","

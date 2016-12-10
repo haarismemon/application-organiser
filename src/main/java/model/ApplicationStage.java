@@ -21,20 +21,6 @@ public class ApplicationStage {
         this.stageName = stageName;
     }
 
-    private Date stringToDate(String dateString) {
-        Date date = null;
-
-        if(!dateString.equals("")) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            try {
-                date = dateFormat.parse(dateString);
-            } catch (ParseException e) {
-                System.out.println("The date supplied is incorrect, date is set to null");
-            }
-        }
-        return date;
-    }
-
     public String getCurrentStatus() {
         if(isCompleted) {
             if(isWaitingForResponse) {
@@ -70,7 +56,7 @@ public class ApplicationStage {
     }
 
     public void setStartDate(String dateOfStart) {
-        this.dateOfStart = stringToDate(dateOfStart);
+        this.dateOfStart = ParseApplications.stringToDate(dateOfStart);
     }
 
     public boolean isCompleted() {
@@ -83,7 +69,7 @@ public class ApplicationStage {
 
     public void setCompleted(boolean completed, String date) {
         setCompleted(completed);
-        this.dateOfCompletion = stringToDate(date);
+        this.dateOfCompletion = ParseApplications.stringToDate(date);
     }
 
     public boolean isWaitingForResponse() {
@@ -106,7 +92,7 @@ public class ApplicationStage {
 
     public void setSuccessful(Boolean successful, String date) {
         setSuccessful(successful);
-        this.dateOfReply = stringToDate(date);
+        this.dateOfReply = ParseApplications.stringToDate(date);
     }
 
     @Override

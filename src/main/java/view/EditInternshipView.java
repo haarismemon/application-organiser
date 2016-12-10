@@ -31,6 +31,9 @@ public class EditInternshipView extends ScrollPane {
     private TextField roleTextField;
     private TextField lengthTextField;
     private TextField locationTextField;
+    private TextField deadlineDateTextField;
+    private TextField linkTextField;
+    private TextArea descriptionTextField;
 
     private Map<ApplicationStage, Map<String, Object>> stageUpdatedInfomation;
 
@@ -72,6 +75,13 @@ public class EditInternshipView extends ScrollPane {
         companyEditGP.add(lengthTextField = new TextField(internship.getLength()), 1,2);
         companyEditGP.add(new Label("Location: "), 0,3);
         companyEditGP.add(locationTextField = new TextField(internship.getLocation()), 1,3);
+        companyEditGP.add(new Label("Due Date: "), 0,4);
+        companyEditGP.add(deadlineDateTextField = new TextField(ParseApplications.formatDate(internship.getDeadlineDate())), 1,4);
+        companyEditGP.add(new Label("Link: "), 0,5);
+        companyEditGP.add(linkTextField = new TextField(ParseApplications.formatDate(internship.getDeadlineDate())), 1,5);
+        companyEditGP.add(new Label("Description: "), 0,6);
+        companyEditGP.add(descriptionTextField = new TextArea(ParseApplications.formatDate(internship.getDeadlineDate())), 1,6);
+        descriptionTextField.setPrefSize(500, 50);
         vBox.getChildren().addAll(companyEditGP, new Separator());
 
         for(ApplicationStage stage : internship.getApplicationStages()) {
@@ -91,6 +101,9 @@ public class EditInternshipView extends ScrollPane {
                 Internship newInternship = new Internship(companyNameTextField.getText(), roleTextField.getText());
                 newInternship.setLength(lengthTextField.getText());
                 newInternship.setLocation(locationTextField.getText());
+                newInternship.setDeadlineDate(deadlineDateTextField.getText());
+                newInternship.setLocation(linkTextField.getText());
+                newInternship.setLocation(descriptionTextField.getText());
 
                 for(ApplicationStage stage : stageUpdatedInfomation.keySet()) {
 

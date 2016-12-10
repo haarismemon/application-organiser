@@ -1,10 +1,7 @@
 package main.java.view;
 
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Separator;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -73,16 +70,35 @@ public class InternshipView extends ScrollPane {
         companyInfoGP.add(locationTitle, 0,3);
         Label locationLabel = new Label(internship.getLocation());
         companyInfoGP.add(locationLabel, 1,3);
+
+        Label deadlineTitle = new Label("Deadline Date: ");
+        companyInfoGP.add(deadlineTitle, 0,4);
+        Label deadlineLabel = new Label(ParseApplications.formatDate(internship.getDeadlineDate()));
+        companyInfoGP.add(deadlineLabel, 1,4);
+        Label linkTitle = new Label("Link: ");
+        companyInfoGP.add(linkTitle, 0,5);
+        Hyperlink linkLabel = new Hyperlink(internship.getLink());
+        companyInfoGP.add(linkLabel, 1,5);
+        Label descriptionTitle = new Label("Description: ");
+        companyInfoGP.add(descriptionTitle, 0,6);
+        Label descriptionLabel = new Label(internship.getDescription());
+        companyInfoGP.add(descriptionLabel, 1,6);
         vBox.getChildren().addAll(companyInfoGP, new Separator());
 
         companyNameTitle.setFont(companyFont);
         roleTitle.setFont(companyFont);
         lengthTitle.setFont(companyFont);
         locationTitle.setFont(companyFont);
+        locationLabel.setFont(companyFont);
         companyNameLabel.setFont(companyFont);
         roleLabel.setFont(companyFont);
         lengthLabel.setFont(companyFont);
-        locationLabel.setFont(companyFont);
+        deadlineTitle.setFont(companyFont);
+        deadlineLabel.setFont(companyFont);
+        linkTitle.setFont(companyFont);
+        linkLabel.setFont(companyFont);
+        descriptionTitle.setFont(companyFont);
+        descriptionLabel.setFont(companyFont);
 
         for(ApplicationStage stage : internship.getApplicationStages()) {
             Font stageFont = new Font("Regular", 14);

@@ -1,6 +1,7 @@
 package main.java.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,6 +13,9 @@ public class Internship {
     private String role;
     private String length;
     private String location;
+    private Date deadlineDate;
+    private String link;
+    private String description;
     private List<ApplicationStage> applicationStages;
 
     public Internship(String companyName, String role) {
@@ -69,6 +73,30 @@ public class Internship {
 
     public String getLocation() {
         return location;
+    }
+
+    public Date getDeadlineDate() {
+        return deadlineDate;
+    }
+
+    public void setDeadlineDate(String deadlineDate) {
+        this.deadlineDate = ParseApplications.stringToDate(deadlineDate);
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
