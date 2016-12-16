@@ -15,7 +15,7 @@ public class ParseApplications {
 
     public ParseApplications() {
         applications = new Applications();
-        applicationFileName = "./src/main/resources/applications.txt";
+        applicationFileName = "applications.txt";
         parse();
     }
 
@@ -32,7 +32,13 @@ public class ParseApplications {
             reader.close();
 
         } catch(IOException e) {
-            System.out.println("File not found.");
+            try {
+                PrintWriter writer = new PrintWriter(applicationFileName);
+                writer.close();
+            } catch (FileNotFoundException e1) {
+                System.out.println("File not found.");
+//                e1.printStackTrace();
+            }
         }
 
         return applications;
@@ -44,7 +50,11 @@ public class ParseApplications {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(applicationFileName));
 
-            copyFileName = applicationFileName.split("applications.txt")[0] + "copy.txt";
+            String[] applicationFileNameArray = applicationFileName.split("applications.txt");
+            if(applicationFileNameArray.length != 0)  {
+                copyFileName = applicationFileNameArray[0] + "copy.txt";
+            }
+            else copyFileName = "copy.txt";
             PrintWriter writer = new PrintWriter(new FileWriter(copyFileName));
 
             String line = null;

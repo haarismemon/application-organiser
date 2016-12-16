@@ -12,7 +12,7 @@ import main.java.view.ApplicationsView;
 public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Internship Application Organiser");
+        primaryStage.setTitle(" Application Organiser by Haaris Memon");
 
         Scene scene = new Scene(new ApplicationsView(), 710, 400);
         primaryStage.setMinWidth(550);
