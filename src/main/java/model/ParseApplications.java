@@ -10,12 +10,14 @@ import java.util.Date;
  */
 public class ParseApplications {
 
-    public Applications applications;
+    private Applications applications;
     private String applicationFileName;
+    private String copyFileName;
 
     public ParseApplications() {
         applications = new Applications();
         applicationFileName = "applications.txt";
+        copyFileName = "copy.txt";
         parse();
     }
 
@@ -45,16 +47,10 @@ public class ParseApplications {
     }
 
     public void updateInternshipCache(String companyName, String role, Internship internship) {
-        String copyFileName = "";
-
         try {
             BufferedReader reader = new BufferedReader(new FileReader(applicationFileName));
 
             String[] applicationFileNameArray = applicationFileName.split("applications.txt");
-            if(applicationFileNameArray.length != 0)  {
-                copyFileName = applicationFileNameArray[0] + "copy.txt";
-            }
-            else copyFileName = "copy.txt";
             PrintWriter writer = new PrintWriter(new FileWriter(copyFileName));
 
             String line = null;
@@ -175,12 +171,9 @@ public class ParseApplications {
     }
 
     public void deleteInternship(Internship internship) {
-        String copyFileName = "";
-
         try {
             BufferedReader reader = new BufferedReader(new FileReader(applicationFileName));
 
-            copyFileName = applicationFileName.split("applications.txt")[0] + "copy.txt";
             PrintWriter writer = new PrintWriter(new FileWriter(copyFileName));
 
             String line = null;
