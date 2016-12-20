@@ -109,6 +109,10 @@ public class ApplicationStage {
         this.dateOfReply = stringToDate(date);
     }
 
+    public String printStage() {
+        return "\\"+stageName+","+isCompleted+","+isWaitingForResponse+","+isSuccessful+","+dateOfStart+","+dateOfCompletion+","+dateOfReply;
+    }
+
     @Override
     public String toString() {
         String s = stageName;

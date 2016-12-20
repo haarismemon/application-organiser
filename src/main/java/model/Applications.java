@@ -21,15 +21,7 @@ public class Applications {
     public List<Internship>  search(String searchQuery) {
         List<Internship> internshipsFound = new ArrayList<>();
         for(Internship internship : applications) {
-            String joinString = internship.getCompanyName()+" "+internship.getRole();
-            for(int i = 0; i < internship.getApplicationStages().size(); ++i) {
-                ApplicationStage stage = internship.getApplicationStages().get(i);
-                if(i == internship.getApplicationStages().size() - 1) {
-                    joinString += " " + stage.toString();
-                } else {
-                    joinString += " " + stage.getStageName();
-                }
-            }
+            String joinString = internship.toString();
             if(joinString.toLowerCase().contains(searchQuery.toLowerCase())) {
                 internshipsFound.add(internship);
             }

@@ -77,4 +77,13 @@ public class Internship {
         boolean isSameRole = getRole().equals(((Internship) obj).getRole());
         return isSameCompanyName && isSameRole;
     }
+
+    @Override
+    public String toString() {
+        String internshipString = getCompanyName()+","+role+","+length+","+location;
+        for(ApplicationStage stage : applicationStages) {
+            internshipString += stage.printStage();
+        }
+        return internshipString;
+    }
 }
